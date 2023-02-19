@@ -2,8 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser'
 import compression from 'compression';
 import errorHandler from "errorhandler";
-import session from "express-session";
-import * as config from './config'
+import {session} from './libs';
 
 const app = express();
 
@@ -18,18 +17,7 @@ app.use(compression());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(session({
-    secret: config.COOKIE_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: false,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: "none",
-        secure: true
-    },
-    store: new session.MemoryStore()
-}));
+app.use(session);
 
 if (process.env.NODE_ENV === "development") {
     app.use(errorHandler());
