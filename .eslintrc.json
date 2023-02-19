@@ -1,0 +1,69 @@
+{
+    "env": {
+        "node": true,
+        "browser": false
+    },
+    "extends": [
+        "eslint-config-airbnb-base",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.test.json"
+    },
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts"]
+        },
+        "import/resolver": {
+            "node": {
+                "extensions": [".ts", ".js"]
+            }
+        },
+        "import/extensions": [".ts", ".d.ts"],
+        "import/external-module-folders": [
+            "node_modules",
+            "node_modules/@types"
+        ]
+    },
+    "ignorePatterns": ["dist/*"],
+    "overrides": [
+        {
+            "files": ["**/__tests__/**/*.test.ts"],
+            "env": {
+                "jest": true
+            },
+            "extends": ["plugin:jest/all"],
+            "plugins": ["jest"],
+            "rules": {
+                "jest/require-hook": "off",
+                "jest/no-hooks": ["error", {
+                    "allow": [
+                        "beforeEach",
+                        "afterEach",
+                        "beforeAll",
+                        "afterAll"
+                    ]
+                }]
+            }
+        }
+    ],
+    "rules": {
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "ts": "never"
+            }
+        ],
+        "camelcase": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": ["error"],
+        "import/no-extraneous-dependencies": "off"
+    }
+}

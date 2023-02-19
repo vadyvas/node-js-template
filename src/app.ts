@@ -1,12 +1,12 @@
 import express from 'express';
-import bodyParser from 'body-parser'
+import bodyParser from 'body-parser';
 import compression from 'compression';
-import errorHandler from "errorhandler";
+import errorHandler from 'errorhandler';
 import nocache from 'nocache';
 import morgan from 'morgan';
 import {
-    session,
-    helmet,
+  session,
+  helmet,
 } from './libs';
 import { isDev } from './config';
 
@@ -28,12 +28,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Security policy requirements
 app.use(helmet.hsts);
 app.use(helmet.referrer);
-app.use(nocache())
+app.use(nocache());
 
-if (process.env.NODE_ENV === "development") {
-    app.use(errorHandler());
+if (process.env.NODE_ENV === 'development') {
+  app.use(errorHandler());
 }
-
-
 
 export default app;
