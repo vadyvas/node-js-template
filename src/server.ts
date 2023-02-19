@@ -1,12 +1,17 @@
 import express from 'express';
 import bodyParser from 'body-parser'
+import errorHandler from "errorhandler";
+
+import * as config from './config'
 
 const app = express();
 
-const port = 3000;
-
 app.use(bodyParser.json())
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+if (process.env.NODE_ENV === "development") {
+    app.use(errorHandler());
+}
+
+app.listen(config.PORT, () => {
+    console.log(`Server is running on port ${config.PORT}`);
 });
